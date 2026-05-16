@@ -5,7 +5,7 @@ description: Create a PRD through user interview, codebase exploration, and modu
 
 # write-prd
 
-**Keywords:** PRD, User Stories, Developer Stories, Deep Modules, Tracer Bullet, Vertical Slice
+**Keywords:** PRD, Product Requirements Document, User Stories, Developer Stories, Deep Modules, Requirements Gathering, Feature Planning
 
 **When:** User wants to plan a new feature or solve a complex problem.
 

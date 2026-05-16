@@ -5,7 +5,7 @@ description: Break a PRD into independently-grabbable GitHub issues using tracer
 
 # to-issues
 
-**Keywords:** Vertical Slice, Tracer Bullet, Parallelism, File Dependencies, Zero File Overlap
+**Keywords:** Vertical Slice, Tracer Bullet, Issue Breakdown, Parallelism, Zero File Overlap, File Dependencies, Dependency Graph, Work Breakdown
 
 **When:** User has a PRD and wants implementation tickets.
 
