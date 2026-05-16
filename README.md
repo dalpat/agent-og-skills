@@ -25,48 +25,60 @@ Instead of bloated skill files that explain what the LLM already knows, each ski
 - **Language/Stack Agnostic** — A `fail-fast` skill works for Python, React, or infrastructure.
 - **Agent-Resilient** — Even if the main agent degrades, a micro-skill invoked at the right moment acts as a circuit breaker.
 
-## The Lifecycle
+## Roadmap
 
-These skills map to the entire AI-assisted project lifecycle:
+Skills are organized by project phase. Status: ✅ Available | 🚧 Planned
 
-```
-0. PROBLEM CLARIFICATION
-   ├─ orient-first         Force orientation before any work begins
-   ├─ detect-xy            "Are you solving Y when the real problem is X?"
-   └─ ambiguity-detector   "Where are you guessing instead of knowing?"
+### Phase 0: Problem Clarification
+| Skill | Status | Trigger |
+|-------|--------|---------|
+| `orient-first` | ✅ | Force orientation before any work begins |
+| `detect-xy` | ✅ | "Are you solving Y when the real problem is X?" |
+| `ambiguity-detector` | 🚧 | "Where are you guessing instead of knowing?" |
 
-1. IDEATION / DESIGN
-   ├─ grill-me             Stress-test the plan, one question at a time
-   ├─ enforce-contract     Define pre/post-conditions for the solution
-   └─ simplify-enforcer    "Is there a simpler way? Have you considered...?"
+### Phase 1: Ideation / Design
+| Skill | Status | Trigger |
+|-------|--------|---------|
+| `grill-me` | 🚧 | Stress-test the plan, one question at a time |
+| `enforce-contract` | 🚧 | Define pre/post-conditions for the solution |
+| `simplify-enforcer` | 🚧 | "Is there a simpler way?" |
 
-2. PLANNING / BREAKDOWN
-   ├─ slice-session        Force a single bounded task per session
-   ├─ tracer-bullet        "Build the thinnest end-to-end path first"
-   └─ to-issues            Break into vertical slices
+### Phase 2: Planning / Breakdown
+| Skill | Status | Trigger |
+|-------|--------|---------|
+| `slice-session` | 🚧 | Force a single bounded task per session |
+| `tracer-bullet` | 🚧 | "Build the thinnest end-to-end path first" |
+| `write-prd` | ✅ | Create a PRD with user + developer stories |
+| `to-issues` | ✅ | Break PRD into vertical slices with file tracking |
 
-3. IMPLEMENTATION
-   ├─ tdd                  Red-green-refactor with vertical slices
-   ├─ enforce-contract     Re-assert contracts at function boundaries
-   ├─ guard-hallucination  Verify APIs/paths/facts before using them
-   └─ chunk-summarize      When context grows, checkpoint and summarize
+### Phase 3: Implementation
+| Skill | Status | Trigger |
+|-------|--------|---------|
+| `tdd` | 🚧 | Red-green-refactor with vertical slices |
+| `guard-hallucination` | 🚧 | Verify APIs/paths/facts before using them |
+| `chunk-summarize` | 🚧 | When context grows, checkpoint and summarize |
 
-4. REVIEW / VERIFICATION
-   ├─ verify-output        "Does this actually solve the stated problem?"
-   ├─ guard-regression     Re-run tests, diff output, catch non-determinism
-   └─ review-assumptions   "What did you assume? Are those assumptions true?"
+### Phase 4: Review / Verification
+| Skill | Status | Trigger |
+|-------|--------|---------|
+| `verify-output` | 🚧 | "Does this actually solve the stated problem?" |
+| `guard-regression` | 🚧 | Re-run tests, diff output, catch non-determinism |
+| `review-assumptions` | 🚧 | "What did you assume? Are those assumptions true?" |
 
-5. HANDOFF / STATE PRESERVATION
-   ├─ hydrate-context      Load canonical state at session start
-   ├─ snapshot-state       Persist session state to canonical source
-   ├─ update-adr           Log irreversible decisions
-   └─ update-context       Sharpen glossary, capture resolved terms
+### Phase 5: Handoff / State Preservation
+| Skill | Status | Trigger |
+|-------|--------|---------|
+| `hydrate-context` | 🚧 | Load canonical state at session start |
+| `snapshot-state` | 🚧 | Persist session state to canonical source |
+| `update-adr` | 🚧 | Log irreversible decisions |
+| `update-context` | 🚧 | Sharpen glossary, capture resolved terms |
 
-6. COMPLETION OR DEAD END
-   ├─ ship-it              Acceptance criteria met? Merge.
-   ├─ pivot-or-perish      "Is this still worth pursuing?"
-   └─ archive-decision     Log why this was abandoned
-```
+### Phase 6: Completion or Dead End
+| Skill | Status | Trigger |
+|-------|--------|---------|
+| `ship-it` | 🚧 | Acceptance criteria met? Merge. |
+| `pivot-or-perish` | 🚧 | "Is this still worth pursuing?" |
+| `archive-decision` | 🚧 | Log why this was abandoned |
 
 ## Installation
 
