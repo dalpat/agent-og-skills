@@ -14,7 +14,8 @@ description: Create a PRD through user interview, codebase exploration, and modu
 2. Explore codebase to verify assertions
 3. Interview relentlessly — resolve every design decision one-by-one
 4. Sketch modules — extract deep modules with simple, testable interfaces
-5. Write PRD: Problem, User Stories, Developer Stories, Implementation Decisions, Testing, Out of Scope
-6. Submit as GitHub issue
+5. Design modules to minimize shared files — enable future parallel implementation
+6. Write PRD: Problem, User Stories, Developer Stories, Implementation Decisions, Testing, Out of Scope
+7. Submit as GitHub issue
 
 **Stop:** No file paths or code snippets in PRD. They become outdated.
