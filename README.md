@@ -1,5 +1,7 @@
 # Agent OG Skills
 
+> Repo: `agent-og-skills` · install slug: `dalpat/agent-og-skills`. One project, one name — referred to as **Agent OG Skills** throughout.
+
 A collection of **micro-skills** for AI agents, grounded in timeless software engineering principles. Each skill is a tiny, composable behavioral trigger — not a lecture.
 
 ## Why Micro-Skills?
@@ -23,7 +25,9 @@ Instead of bloated skill files that explain what the LLM already knows, each ski
 - **Composable** — Chain skills like Unix pipes: `orient-first | tracer-bullet | guard-hallucination`
 - **Testable** — Each skill is small enough to validate independently.
 - **Language/Stack Agnostic** — A `fail-fast` skill works for Python, React, or infrastructure.
-- **Agent-Resilient** — Even if the main agent degrades, a micro-skill invoked at the right moment acts as a circuit breaker.
+- **Guardrails at known failure points** — Each skill targets a predictable failure mode in the SDLC (premature solving, XY problems, scope creep) and nudges the agent back on track when it triggers.
+
+> **How skills fire (important):** A skill activates when the agent *matches its `description`* to the situation — it is model-invoked, not a guaranteed interrupt. If you need a behavior to run unconditionally (e.g. force `orient-first` at the start of every session), wire it as a **`SessionStart` hook**, not a skill. Skills are guardrails, not circuit breakers — they depend on the agent being healthy enough to route to them.
 
 ## Roadmap
 
@@ -82,12 +86,13 @@ Skills are organized by project phase. Status: ✅ Available | 🚧 Planned
 
 ## Installation
 
-Install individual skills using the [Skills CLI](https://skills.sh/):
+Install individual skills using the [Skills CLI](https://skills.sh/). Only ✅ Available skills can be installed:
 
 ```bash
 npx skills add dalpat/agent-og-skills --skill orient-first
-npx skills add dalpat/agent-og-skills --skill guard-hallucination
-npx skills add dalpat/agent-og-skills --skill tracer-bullet
+npx skills add dalpat/agent-og-skills --skill detect-xy
+npx skills add dalpat/agent-og-skills --skill write-prd
+npx skills add dalpat/agent-og-skills --skill to-issues
 ```
 
 Or install globally:
@@ -95,6 +100,35 @@ Or install globally:
 ```bash
 npx skills add dalpat/agent-og-skills --skill orient-first -g -y
 ```
+
+> Skills are plain `SKILL.md` files (frontmatter `name` + `description`, then the body). They also work with any agent that reads the SKILL.md format — e.g. drop a skill folder into `~/.config/opencode/skills/` for [opencode](https://opencode.ai), or `.claude/skills/` for Claude Code.
+
+## Forcing a skill to always run (hooks)
+
+A skill is *model-invoked* — it fires only when the agent matches its `description`. In practice that means subtle triggers can be missed entirely (e.g. an agent may answer an XY question directly instead of pausing). When a behavior must run **unconditionally**, inject it at session start instead of relying on activation.
+
+`orient-first` ships with a ready-made example in [`hooks/`](./hooks):
+
+**Claude Code** — wire the script as a `SessionStart` hook in `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command",
+          "command": "$CLAUDE_PROJECT_DIR/hooks/orient-first-session-start.sh" } ] }
+    ]
+  }
+}
+```
+
+**opencode** — point the global `instructions` array at the directive in `~/.config/opencode/opencode.json`:
+
+```json
+{ "instructions": ["~/path/to/agent-og-skills/hooks/orient-first.directive.md"] }
+```
+
+Both inject the orientation directive into every new session, so the behavior runs even on a degraded or distracted agent. Use this pattern for any skill where a missed trigger is unacceptable.
 
 ## Contributing
 
